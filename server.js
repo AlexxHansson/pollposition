@@ -1,5 +1,6 @@
 var express = require('express');
 var db = require('./db');
+var _ = require('lodash');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
 var app = express();
@@ -34,11 +35,55 @@ app.get('/api/at', function (req, res){
     'use strict';
     var data = JSON.parse(req.query.q);
     console.log(data);
-    db.query('SELECT * FROM polls', function (data){
-        res.status(200).send(data);
+    db.query('SELECT polls.id AS pollId, polls.question, polls.location, '+
+             'polloptions.id AS polloptionId, polloptions.description AS polloptionDescription, '+
+             'votes.id AS voteId FROM polls '+
+             'INNER JOIN polloptions ON polloptions.polls_id = polls.id '+
+             'LEFT JOIN votes ON votes.polls_id = polls.id', function (data){
+
+        var polls = {};
+
+        data.forEach(function(row) {
+            if ( ! polls[row.pollId]) {
+                polls[row.pollId] = {
+                    id: row.pollId,
+                    question: row.question,
+                    options: {}
+                };
+            }
+
+            if ( ! polls[row.pollId].options[row.polloptionId]) {
+                polls[row.pollId].options[row.polloptionId] = {
+                    description: row.polloptionDescription,
+                    voteCount: 0
+                };
+            }
+
+            if (row.voteId) {
+                polls[row.pollId].options[row.polloptionId].voteCount++;
+            }
+        });
+
+        var pollsArr = [];
+
+        for (var pollId in polls) {
+            var poll = polls[pollId];
+
+            poll.options = _.values(poll.options);
+
+            pollsArr.push(poll);
+        }
+
+        res.status(200).send(pollsArr);
     });
 
 });
+
+app.get('/api/polls', function (req, res){
+    'use strict';
+    res.status(200).send(data);
+});
+
 app.get('/api/test', function (req, res){
     'use strict';
     res.status(200).send('Hello Alexander');

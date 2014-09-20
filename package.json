@@ -20,7 +20,9 @@
     "express": "~4.9.4",
     "sql": "~0.40.0",
     "mysql": "~2.5.0",
-    "passport":"*",
-    "passport-google":"*"
+    "passport": "*",
+    "passport-google": "*",
+    "lodash": "~2.4.1",
+    "body-parser": "~1.8.3"
   }
 }
