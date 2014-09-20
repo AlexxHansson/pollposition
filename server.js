@@ -1,7 +1,11 @@
 var app = require('express')();
+var express = require('express');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var sql = require('sql');
+
+
+app.use('/', express.static(__dirname + '/app'));
 
 app.get('/', function (req, res) {
     'use strict';
