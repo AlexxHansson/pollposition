@@ -1,7 +1,7 @@
 var express = require('express');
 var sql = require('sql');
 var passport = require('passport');
-, GoogleStrategy = require('passport-google').Strategy;
+GoogleStrategy = require('passport-google').Strategy;
 var app = express();
 
 app.all('/*', function(req, res, next) {
@@ -15,7 +15,7 @@ var passport = require('passport')
   , GoogleStrategy = require('passport-google').Strategy;
 
 passport.use(new GoogleStrategy({
-    returnURL: 'http://www.example.com/auth/google/return',
+    returnURL: 'http://pollposition.johandamm.com/auth/google/return',
     realm: 'http://pollposition.johandamm.com:8080'
   },
   function(identifier, profile, done) {
@@ -25,15 +25,7 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-app.configure(function() {
-  app.use(express.static('public'));
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.session({ secret: 'keyboard cat' }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(app.router);
-});
+
 
 app.use('/', express.static(__dirname + '/app'));
 
@@ -46,7 +38,7 @@ app.get('/api/getClosestPolls', function (req, res){
     'use strict';
     
     var data = {
-        'foo': 'bar',
+        'foo': 'bar'
     };
     res.send(200, data);
 
