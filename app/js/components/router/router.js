@@ -4,8 +4,8 @@ var MainRouter = Backbone.Router.extend({
         "*actions": "defaultRoute"
     },
     dashboard: function() {
-		var dashboard = new DashboardView();
-		dashboard.render();
+  		var dashboard = new DashboardView();
+  		dashboard.render();
 
 		var pollCol = new PollCollection();
 		var pollPoint1 = new PollModel(56.170923, 14.863523);
@@ -19,8 +19,19 @@ var MainRouter = Backbone.Router.extend({
 		pollCol.add(pollPoint4);
 		//pollCol.fetch();
 
-		var map = new MapView(pollCol);
-		map.render();
+		getLocation();
+
+		function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+				console.log('hej')
+			}
+		};
+		function showPosition(position, pollCol) {
+			console.log(position);
+			var map = new MapView(position);
+			map.render();
+		};
   	},
   	polls: function() {
 		
