@@ -1,5 +1,5 @@
 var express = require('express');
-var sql = require('sql');
+var db = require('./db');
 var passport = require('passport');
 , GoogleStrategy = require('passport-google').Strategy;
 var app = express();
@@ -42,13 +42,13 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname+'/app/index.html');
 });
 
-app.get('/api/getClosestPolls', function (req, res){
+app.get('/api/at', function (req, res){
     'use strict';
-    
-    var data = {
-        'foo': 'bar',
-    };
-    res.send(200, data);
+    var data = JSON.parse(req.query.q);
+    console.log(data);
+    db.query('SELECT * FROM polls', function (data){
+        res.status(200).send(data);
+    });
 
 });
 //google login deets
@@ -61,13 +61,13 @@ app.get('/auth/google/return',
 app.get('/api/vote', function (req, res){
     'use strict';
 
-    res.send(200);
+    res.status(200);
 });
 
 app.post('/api/createPoll', function (req, res){
     'use strict';
 
-    res.send(200);
+    res.status(200);
 });
 
 app.listen(8080);
