@@ -21,7 +21,7 @@ app.get('/api/getClosestPolls', function (req, res){
     'use strict';
     
     var data = {
-        'foo': 'bar'
+        'foo': 'bar',
     };
     res.send(200, data);
 
