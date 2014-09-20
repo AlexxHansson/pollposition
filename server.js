@@ -1,7 +1,7 @@
 var express = require('express');
 var db = require('./db');
 var passport = require('passport');
-GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google').Strategy;
 var app = express();
 
 app.all('/*', function(req, res, next) {
@@ -11,19 +11,15 @@ app.all('/*', function(req, res, next) {
     next();
 });
 
-var passport = require('passport')
-  , GoogleStrategy = require('passport-google').Strategy;
-
 passport.use(new GoogleStrategy({
-    returnURL: 'http://pollposition.johandamm.com/auth/google/return',
-    realm: 'http://pollposition.johandamm.com:8080'
-  },
-  function(identifier, profile, done) {
-    User.findOrCreate({ openId: identifier }, function(err, user) {
-      done(err, user);
-    });
-  }
-));
+        returnURL: 'http://pollposition.johandamm.com/auth/google/return',
+        realm: 'http://pollposition.johandamm.com:8080'
+    }, function(identifier, profile, done) {
+        'use strict';
+        User.findOrCreate({ openId: identifier }, function(err, user) {
+            done(err, user);
+        });
+    }));
 
 
 
@@ -45,7 +41,7 @@ app.get('/api/at', function (req, res){
 });
 //google login deets
 app.get('/auth/google', passport.authenticate('google'));
-app.get('/auth/google/return', 
+app.get('/auth/google/return',
   passport.authenticate('google', { successRedirect: '/',
                                     failureRedirect: '/login' }));
 
