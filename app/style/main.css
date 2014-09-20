@@ -1,6 +1,9 @@
 .well,.modal{
 	border-radius:0!important;
 }
+.modal-header{
+	border: none!important;
+}
 button{
 	padding:10px 0;
 	border:none;
