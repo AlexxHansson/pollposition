@@ -46,7 +46,7 @@ app.get('/api/polls/at', function (req, res){
     'use strict';
     var data = JSON.parse(req.query.q);
     console.log(data);
-    db.query('SELECT polls.id AS pollId, polls.question, polls.location, '+
+    db.query('SELECT polls.id AS pollId, polls.question, X(polls.location) AS pollLocationLat, Y(polls.location) AS pollLocationLng, '+
              'polloptions.id AS polloptionId, polloptions.description AS polloptionDescription, '+
              'votes.id AS voteId FROM polls '+
              'INNER JOIN polloptions ON polloptions.polls_id = polls.id '+
@@ -59,6 +59,7 @@ app.get('/api/polls/at', function (req, res){
                 polls[row.pollId] = {
                     id: row.pollId,
                     question: row.question,
+                    location: [row.pollLocationLat, row.pollLocationLng],
                     options: {}
                 };
             }
