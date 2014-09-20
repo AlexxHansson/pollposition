@@ -37,4 +37,4 @@ io.on('connection', function (socket) {
     });
 });
 
-server.listen(8080);
+app.listen(8080);
