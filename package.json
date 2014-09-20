@@ -21,6 +21,6 @@
     "sql": "~0.40.0",
     "mysql": "~2.5.0",
     "passport":"*",
-    "passport-google":"*"
+    "passport-google-oauth":"*"
   }
 }
