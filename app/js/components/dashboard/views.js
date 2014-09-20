@@ -1,7 +1,7 @@
 var DashboardView = Backbone.View.extend({
 	el: "#main-container",
 	initialize: function () {
-        console.log('Dashboard View Initialized');
+
     },
 	render: function () {
 		var that = this;
