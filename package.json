@@ -1,7 +1,7 @@
 {
   "name": "pollposition",
   "version": "0.0.0",
-  "description": "pollposition ============",
+  "description": "pollposition",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,9 +20,7 @@
     "express": "~4.9.4",
     "sql": "~0.40.0",
     "mysql": "~2.5.0",
-    "passport": "*",
-    "passport-google": "*",
-    "lodash": "~2.4.1",
-    "body-parser": "~1.8.3"
+    "passport":"*",
+    "passport-google-oauth":"*"
   }
 }

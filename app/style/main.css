@@ -1,5 +1,8 @@
-.well{
+.well,.modal{
 	border-radius:0!important;
+}
+.modal-header{
+	border: none!important;
 }
 button{
 	padding:10px 0;
@@ -43,13 +46,6 @@ footer{
 	display: inline-block;
 	float: right;
 }
-.launcher{
-	background: url(../img/bg.jpg) no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
 .field{
 	background: #E8EFF7!important;
 }
@@ -66,5 +62,18 @@ footer{
 
 .login a{
 	text-decoration: none;
+}
+#map{
+	height: 400px;
+}
+.launcher #main-container #map{
+	height: 100%!important;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
 }
 
