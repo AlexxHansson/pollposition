@@ -1,30 +1,29 @@
-var pg = require('pg');
+var mysql = require('mysql');
 
-var connString = 'postgres://pollposition:pollposition@localhost/pollposition';
+var connString = 'mysql://pollposition:pollposition@localhost/pollposition';
+
+var pool = mysql.createPool({
+	connectionLimit: 10,
+	host: 'localhost',
+	user: 'pollposition',
+	password: 'pollposition'
+});
 
 /**
  * Simple wrapper to query the db.
- * Will use the underlying connection pooling, reusing connections between requests.
+ * Will use the underlying connection pooling.
  * @param {string} q - the SQL-query
  * @param {function} cb - the callback if the query is successful. Receives the result as argument.
  * @param {function} errCb - the callback if the query is not successful. Error is the first argument.
  */
 function query(q, cb, errCb) {
-	pg.connect(connString, function(err, client, done) {
+	pool.query(q, function(err, rows, fields) {
 		if (err) {
+			console.warn('sql error', err);
 			errCb(err);
-			return console.warn('pg connection error', err);
 		}
-
-		client.query(q, function(err, result) {
-			done();
-			
-			if (err) {
-				errCb(err);
-				return console.warn('pg query error', err);
-			}
-
-			cb(result);
-		});
+		else {
+			cb(rows, fields);
+		}
 	});
 }
