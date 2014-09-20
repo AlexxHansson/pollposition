@@ -5,15 +5,9 @@ var PollModel = Backbone.Model.extend({
 });
 
 var PollCollection = Backbone.Collection.extend({
-	url: '/api/getClosestPolls',
+	url: '/api/test',
 	model: PollModel,
 	initialize: function () {
         console.log('Poll collection Initialized');
     }
 });
-
-var pollCol = new PollCollection();
-
-pollCol.fetch();
-
-console.log(pollCol);
