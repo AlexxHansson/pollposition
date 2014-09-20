@@ -20,14 +20,16 @@ app.get('/', function (req, res) {
 app.get('/api/getClosestPolls', function (req, res){
     'use strict';
     
-    var data = {};
+    var data = {
+        'foo': 'bar'
+    };
     res.send(200, data);
 
 });
 
 app.get('/api/vote', function (req, res){
     'use strict';
-    
+
     res.send(200);
 });
 
