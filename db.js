@@ -1,9 +1,8 @@
 var mysql = require('mysql');
 
-var connString = 'mysql://pollposition:pollposition@localhost/pollposition';
-
 var pool = mysql.createPool({
 	connectionLimit: 10,
+	database: 'pollposition',
 	host: 'localhost',
 	user: 'pollposition',
 	password: 'pollposition'
@@ -17,6 +16,7 @@ var pool = mysql.createPool({
  * @param {function} errCb - the callback if the query is not successful. Error is the first argument.
  */
 function query(q, cb, errCb) {
+	'use strict';
 	pool.query(q, function(err, rows, fields) {
 		if (err) {
 			console.warn('sql error', err);
@@ -27,3 +27,5 @@ function query(q, cb, errCb) {
 		}
 	});
 }
+
+module.exports = {query:query};
