@@ -4,6 +4,12 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var sql = require('sql');
 
+app.all('/*', function(req, res, next) {
+    'use strict';
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept');
+    next();
+});
 
 app.use('/', express.static(__dirname + '/app'));
 
