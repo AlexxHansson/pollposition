@@ -10,7 +10,7 @@ var MainRouter = Backbone.Router.extend({
 		var pollCol = new PollCollection();
 		pollCol.fetch();
 
-		var map = new MapView({collection: pollCol});
+		var map = new MapView();
 		map.render();
   	},
   	polls: function() {
