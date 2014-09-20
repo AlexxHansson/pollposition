@@ -39,6 +39,11 @@ app.get('/api/at', function (req, res){
     });
 
 });
+app.get('/api/test', function (req, res){
+    'use strict';
+    res.status(200).send('Hello Alexander');
+});
+
 //google login deets
 app.get('/auth/google', passport.authenticate('google'));
 app.get('/auth/google/return',
