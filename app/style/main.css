@@ -1,1 +1,50 @@
-body{background: black;}
+.well{
+	border-radius:0!important;
+}
+.login-pane{
+	text-align: center;
+}
+button{
+	padding:10px 0;
+	border:none;
+}
+h2{text-align: center;
+	font:200% Lobster;
+	color:#E8EFF7;
+}
+div.hr {
+  height: 20px;
+  background: url(../img/hr.png) no-repeat scroll center;
+}
+div.hr hr {
+  display: none;
+}
+footer{
+	background: #477AA4;
+	color:whitesmoke;
+	position: relative;
+	padding: 10px;
+	bottom: 0;
+	left: 0;
+	right:0;
+}
+.pane.img{
+	text-align: center;
+	min-width: 100%;
+}
+
+
+.field{
+	background: #E8EFF7!important;
+}
+.pane{
+	background: #B5D6EC!important;
+}
+.forward{
+	color:#E8EFF7;
+	background: #0F6698!important;
+}
+.forward:hover{
+	background: #0f70a8!important;
+}
+
