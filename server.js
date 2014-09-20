@@ -1,8 +1,6 @@
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-
-var pg = require('pg');
 var sql = require('sql');
 
 app.get('/', function (req, res) {
@@ -13,7 +11,7 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
     'use strict';
     console.log('user connected');
-    
+
     socket.emit('connected');
 
     socket.on('getClosest', function (data){
