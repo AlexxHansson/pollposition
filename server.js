@@ -12,20 +12,20 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
     'use strict';
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
+    console.log('user connected');
+    
+    socket.emit('connected');
+
+    socket.on('getClosest', function (data){
         console.log(data);
     });
 
-    socket.on('getClosest', function(data){
+    socket.on('createPoll', function (data){
         console.log(data);
     });
 
-    socket.on('createPoll', function(data){
-        console.log(data);
-    });
-
-    socket.on('vote', function(data){
+    socket.on('vote', function (data){
+        socket.emit('voted');
         console.log(data);
     });
 });
