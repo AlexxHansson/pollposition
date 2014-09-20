@@ -1,5 +1,5 @@
 var DashboardView = Backbone.View.extend({
-	el: "body",
+	el: "#main-container",
   	//template: _.template("<b><%= value %></b><b><%= asd %></b>"),
 	// render: function(){
 	//     this.$el.append(this.template({value: "hej", asd: "asdasd"}));
@@ -10,10 +10,8 @@ var DashboardView = Backbone.View.extend({
     },
 	render: function () {
 		var that = this;
-		var hello = "Hello";
-		var world = [1, 2, 3];
 		$.get('js/components/dashboard/templates/dashboard.html', function (data) {
-	        template = _.template(data)({hello: hello, world: world});//Option to pass any dynamic values to template
+	        template = _.template(data)({});//Option to pass any dynamic values to template
 	        that.$el.append(template);//adding the template content to the main template.
 	    }, 'html');
 	}
