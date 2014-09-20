@@ -17,24 +17,24 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname+'/app/index.html');
 });
 
-io.on('connection', function (socket) {
+app.get('/api/getClosestPolls', function (req, res){
     'use strict';
-    console.log('user connected');
+    
+    var data = {};
+    res.send(200, data);
 
-    socket.emit('connected');
+});
 
-    socket.on('getClosest', function (data){
-        console.log(data);
-    });
+app.get('/api/vote', function (req, res){
+    'use strict';
 
-    socket.on('createPoll', function (data){
-        console.log(data);
-    });
+    res.send(200);
+});
 
-    socket.on('vote', function (data){
-        socket.emit('voted');
-        console.log(data);
-    });
+app.post('/api/createPoll', function (req, res){
+    'use strict';
+
+    res.send(200);
 });
 
 app.listen(8080);
