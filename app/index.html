@@ -4,6 +4,8 @@
 	<link rel="stylesheet" type="text/css" href="style/main.css">
 	<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 </head>
 <body class="field">
@@ -22,8 +24,7 @@
 		<i>"Blah blah blah blah blah ahaah balh bla!"</i>
 	</div>
 
-	<div class="row well pane">
-		<img src="img/placeolder.jpg" alt="demo"> 
+	<div class="row well pane" id="main-container">
 	</div> 
 
 	<div class="row well pane">
@@ -40,8 +41,11 @@
 	<script src="js/underscore.js"></script>
 	<script src="js/backbone.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
-	<!--<script src="js/components/dashboard/views.js"></script>-->
+	<script src="js/components/polls/models.js"></script>
+	<script src="js/components/dashboard/views.js"></script>
+	<script src="js/components/polls/views.js"></script>
+	<script src="js/components/map/views.js"></script>
+	<script src="js/components/router/router.js"></script>
 </body>
 </html>
 

@@ -33,6 +33,9 @@ footer{
 	min-width: 100%;
 }
 
+#map {
+	height: 400px;
+}
 
 .field{
 	background: #E8EFF7!important;
