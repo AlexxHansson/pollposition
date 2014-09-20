@@ -19,8 +19,12 @@ function query(q, cb, errCb) {
 	'use strict';
 	pool.query(q, function(err, rows, fields) {
 		if (err) {
-			console.warn('sql error', err);
-			errCb(err);
+			if (errCb) {
+				errCb(err);
+			}
+			else {
+				console.warn('sql error', err);
+			}
 		}
 		else {
 			cb(rows, fields);
