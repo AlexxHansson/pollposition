@@ -7,7 +7,7 @@ var sql = require('sql');
 
 app.get('/', function (req, res) {
     'use strict';
-    res.sendfile(__dirname+'/../app/index.html');
+    //res.sendfile(__dirname+'/../app/index.html');
 });
 
 io.on('connection', function (socket) {
