@@ -1,8 +1,7 @@
-var app = require('express')();
 var express = require('express');
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
 var sql = require('sql');
+
+var app = express();
 
 app.all('/*', function(req, res, next) {
     'use strict';
