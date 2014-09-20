@@ -1,13 +1,13 @@
 var MapView = Backbone.View.extend({
 	el: "#main-container",
 	initialize: function(pollCollection){
-		this.polls = pollCollection;
+		
 	},
 	render: function(){
 		var that = this;
 		
 		$.get('js/components/map/templates/map.html', function (data) {
-	        template = _.template(data)({});
+	        template = _.template(data)({test: that.polls});
 	        that.$el.append(template);
 	        that.initMap();
 	    }, 'html');
