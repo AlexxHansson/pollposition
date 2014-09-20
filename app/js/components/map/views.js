@@ -13,6 +13,7 @@ var MapView = Backbone.View.extend({
 	        template = _.template(data)();
 	        that.$el.append(template);
 	        that.initMap();
+	        that.addPoints();
 	    }, 'html');
 	},
 	initMap: function(){
