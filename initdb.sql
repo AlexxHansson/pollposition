@@ -13,6 +13,7 @@ CREATE TABLE users (
 CREATE TABLE polls (
 	id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
 	question TEXT,
+        location POINT,
 	users_id INTEGER UNSIGNED NOT NULL,
 	CONSTRAINT idx_polls_users FOREIGN KEY fk_polls_users (users_id) REFERENCES users(id)
 		ON DELETE CASCADE,
