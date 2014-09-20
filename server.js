@@ -27,7 +27,7 @@ app.get('/api/getClosestPolls', function (req, res){
 
 app.get('/api/vote', function (req, res){
     'use strict';
-    console.log('hello');
+    
     res.send(200);
 });
 
