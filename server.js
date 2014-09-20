@@ -1,6 +1,7 @@
 var express = require('express');
 var sql = require('sql');
-
+var passport = require('passport');
+, GoogleStrategy = require('passport-google').Strategy;
 var app = express();
 
 app.all('/*', function(req, res, next) {
@@ -8,6 +9,30 @@ app.all('/*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept');
     next();
+});
+
+var passport = require('passport')
+  , GoogleStrategy = require('passport-google').Strategy;
+
+passport.use(new GoogleStrategy({
+    returnURL: 'http://www.example.com/auth/google/return',
+    realm: 'http://pollposition.johandamm.com:8080'
+  },
+  function(identifier, profile, done) {
+    User.findOrCreate({ openId: identifier }, function(err, user) {
+      done(err, user);
+    });
+  }
+));
+
+app.configure(function() {
+  app.use(express.static('public'));
+  app.use(express.cookieParser());
+  app.use(express.bodyParser());
+  app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
 });
 
 app.use('/', express.static(__dirname + '/app'));
@@ -21,12 +46,18 @@ app.get('/api/getClosestPolls', function (req, res){
     'use strict';
     
     var data = {
-        'foo': 'bar'
+        'foo': 'bar',
     };
     res.send(200, data);
 
 });
+//google login deets
+app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google/return', 
+  passport.authenticate('google', { successRedirect: '/',
+                                    failureRedirect: '/login' }));
 
+//slut på google stuff
 app.get('/api/vote', function (req, res){
     'use strict';
 
