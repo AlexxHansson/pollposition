@@ -4,14 +4,23 @@ var MainRouter = Backbone.Router.extend({
         "*actions": "defaultRoute"
     },
     dashboard: function() {
-		var dashboard = new DashboardView();
-		dashboard.render();
+  		var dashboard = new DashboardView();
+  		dashboard.render();
 
-		var pollCol = new PollCollection();
-		pollCol.fetch();
-
-		var map = new MapView();
-		map.render();
+  		var pollCol = new PollCollection();
+  		pollCol.fetch();
+      getLocation();
+      function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+            console.log('hej')
+        }
+      }
+      function showPosition(position) {
+        console.log(position);
+        var map = new MapView(position);
+        map.render();
+      }
   	},
   	polls: function() {
 		
