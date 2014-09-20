@@ -2,7 +2,8 @@ var express = require('express');
 var db = require('./db');
 var _ = require('lodash');
 var passport = require('passport');
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 var app = express();
 
 app.all('/*', function(req, res, next) {
@@ -13,19 +14,19 @@ app.all('/*', function(req, res, next) {
 });
 
 passport.use(new GoogleStrategy({
-        returnURL: 'http://pollposition.johandamm.com/auth/google/return',
-        realm: 'http://pollposition.johandamm.com:8080'
-    }, function(identifier, profile, done) {
-        'use strict';
-        User.findOrCreate({ openId: identifier }, function(err, user) {
-            done(err, user);
-        });
-    }));
-
-
-
+    clientID: "449173717835-qt7169os9ghveu6acn8m5uitfkclb2ag.apps.googleusercontent.com",
+    clientSecret: "kIY2Jl-lBzcPz0eqBq2pbstG",
+    callbackURL: "http://127.0.0.1:8080/oauth2callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
 app.use('/', express.static(__dirname + '/app'));
-
+ app.use(passport.initialize());
+app.use(passport.session());
 app.get('/', function (req, res) {
     'use strict';
     res.sendFile(__dirname+'/app/index.html');
@@ -90,11 +91,17 @@ app.get('/api/test', function (req, res){
 });
 
 //google login deets
-app.get('/auth/google', passport.authenticate('google'));
-app.get('/auth/google/return',
-  passport.authenticate('google', { successRedirect: '/',
-                                    failureRedirect: '/login' }));
+//--------------------------------------------
+app.get('/auth/google',
+    passport.authenticate('google', {scope: 'https://www.googleapis.com/auth/plus.login'}));
 
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/app/index.html' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/app/index.html');
+  });
+//--------------------------------------------
 //slut på google stuff
 app.get('/api/vote', function (req, res){
     'use strict';
